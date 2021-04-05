@@ -81,7 +81,7 @@ M.setup = function()
     M.highlight("Todo", {fg = M.colors.purple})
 
     M.highlight("ColorColumn", {bg = M.colors.dark_black})
-    M.highlight("Conceal", {})
+    M.highlight("Conceal", {fg = M.colors.cursor_grey})
     M.highlight("Cursor", {fg = M.colors.black, bg = M.colors.blue})
     M.highlight("CursorIM", {})
     M.highlight("CursorColumn", {bg = M.colors.dark_black})
@@ -306,6 +306,8 @@ M.setup = function()
 
     M.highlight("TSDefinitionUsage", {gui = "bold"})
     M.highlight("TSDefinition", {gui = "bold"})
+
+    M.highlight("IndentBlanklineContextChar", {fg = M.colors.visual_grey, gui = "nocombine"})
 end
 
 return M
