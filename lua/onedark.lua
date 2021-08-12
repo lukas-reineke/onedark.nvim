@@ -4,8 +4,9 @@ M.highlight = function(group, options)
     local guifg = options.fg or "NONE"
     local guibg = options.bg or "NONE"
     local gui = options.gui or "NONE"
+    local blend = options.blend or 0
 
-    vim.cmd(string.format("highlight %s guifg=%s guibg=%s gui=%s", group, guifg, guibg, gui))
+    vim.cmd(string.format("highlight %s guifg=%s guibg=%s gui=%s blend=%d", group, guifg, guibg, gui, blend))
 end
 
 M.link = function(groupa, groupb)
@@ -81,14 +82,14 @@ M.setup = function()
     M.highlight("Todo", {fg = M.colors.purple})
 
     M.highlight("ColorColumn", {bg = M.colors.dark_black})
-    M.highlight("Conceal", {fg = M.colors.cursor_grey})
-    M.highlight("Cursor", {fg = M.colors.black, bg = M.colors.blue})
+    M.highlight("Conceal", {fg = M.colors.red})
+    M.highlight("Cursor", {fg = M.colors.black, bg = M.colors.green})
     M.highlight("CursorIM", {})
     M.highlight("CursorColumn", {bg = M.colors.dark_black})
     M.highlight("CursorLine", {bg = M.colors.dark_black})
     M.highlight("Directory", {fg = M.colors.blue})
     M.highlight("DiffAdd", {bg = M.colors.diff_green})
-    M.highlight("DiffChange", {})
+    M.highlight("DiffChange", {bg = M.colors.diff_yellow})
     M.highlight("DiffDelete", {bg = M.colors.diff_red, fg = M.colors.black})
     M.highlight("DiffText", {bg = M.colors.diff_yellow})
     M.highlight("ErrorMsg", {fg = M.colors.red})
@@ -104,7 +105,7 @@ M.setup = function()
     M.highlight("MoreMsg", {})
     M.highlight("NonText", {fg = M.colors.special_grey})
     M.highlight("Normal", {fg = M.colors.white})
-    M.highlight("Pmenu", {bg = M.colors.dark_black})
+    M.highlight("Pmenu", {bg = M.colors.dark_black, blend = 10})
     M.highlight("PmenuSel", {fg = M.colors.black, bg = M.colors.green})
     M.highlight("PmenuSbar", {bg = M.colors.special_grey})
     M.highlight("PmenuThumb", {bg = M.colors.white})
@@ -248,6 +249,11 @@ M.setup = function()
     M.highlight("gitcommitSummary", {fg = M.colors.white})
     M.highlight("gitcommitOverflow", {fg = M.colors.red})
 
+    M.highlight("GitHubUserName", {fg = M.colors.purple, gui = "italic"})
+    M.highlight("GitHubDate", {fg = M.colors.yellow})
+    M.highlight("GitHubCommentLength", {fg = M.colors.comment_grey, gui = "italic"})
+    M.highlight("GitHubAuthorAssociation", {fg = M.colors.special_grey, gui = "italic,bold"})
+
     M.highlight("Defx_git_Untracked", {fg = M.colors.red})
     M.link("Defx_git_4_Untracked", "gitcommitUntrackedFile")
     M.link("Defx_git_4_Ignored", "gitcommitSummary")
@@ -303,11 +309,18 @@ M.setup = function()
     M.highlight("LspDiagnosticsUnderlineWarning", {fg = M.colors.purple, gui = "underline"})
     M.highlight("LspDiagnosticsUnderlineInformation", {fg = M.colors.cyan, gui = "underline"})
     M.highlight("LspDiagnosticsUnderlineHint", {fg = M.colors.comment_grey, gui = "underline"})
+    M.highlight("FloatBorder", {fg = M.colors.comment_grey})
+    M.highlight("FloatBorderDark", {fg = M.colors.comment_grey, bg = M.colors.dark_black})
+    M.highlight("FloatShadow", {bg = M.colors.black, blend = 80})
+    M.highlight("FloatShadowThrough", {bg = M.colors.black, blend = 100})
 
     M.highlight("TSDefinitionUsage", {gui = "bold"})
     M.highlight("TSDefinition", {gui = "bold"})
 
     M.highlight("IndentBlanklineContextChar", {fg = M.colors.visual_grey, gui = "nocombine"})
+
+    M.highlight("RenamePrompt", {fg = M.colors.dark_yellow, gui = "bold"})
+    M.highlight("DiagnosticSource", {fg = M.colors.cursor_grey, gui = "bold"})
 end
 
 return M
