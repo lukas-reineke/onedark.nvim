@@ -3,10 +3,13 @@ M = {}
 M.highlight = function(group, options)
     local guifg = options.fg or "NONE"
     local guibg = options.bg or "NONE"
+    local guisp = options.sp or "NONE"
     local gui = options.gui or "NONE"
     local blend = options.blend or 0
 
-    vim.cmd(string.format("highlight %s guifg=%s guibg=%s gui=%s blend=%d", group, guifg, guibg, gui, blend))
+    vim.cmd(
+        string.format("highlight %s guifg=%s guibg=%s guisp=%s gui=%s blend=%d", group, guifg, guibg, guisp, gui, blend)
+    )
 end
 
 M.link = function(groupa, groupb)
@@ -292,8 +295,6 @@ M.setup = function()
     M.highlight("VimwikiHeader5", { fg = M.colors.green, gui = "bold" })
     M.highlight("VimwikiHeader6", { fg = M.colors.green, gui = "bold" })
 
-    M.highlight("IndentGuide", { fg = M.colors.cursor_grey })
-
     M.highlight("Whitespace", { fg = M.colors.cursor_grey })
 
     M.link("gwitcommitNoBranch", "gitcommitBranch")
@@ -316,10 +317,10 @@ M.setup = function()
     M.highlight("DiagnosticWarn", { fg = M.colors.purple, gui = "bold" })
     M.highlight("DiagnosticInfo", { fg = M.colors.cyan, gui = "bold" })
     M.highlight("DiagnosticHint", { fg = M.colors.comment_grey, gui = "bold" })
-    M.highlight("DiagnosticUnderlineError", { fg = M.colors.dark_red, gui = "underline" })
-    M.highlight("DiagnosticUnderlineWarning", { fg = M.colors.purple, gui = "underline" })
-    M.highlight("DiagnosticUnderlineInfo", { fg = M.colors.cyan, gui = "underline" })
-    M.highlight("DiagnosticUnderlineHint", { fg = M.colors.comment_grey, gui = "underline" })
+    M.highlight("DiagnosticUnderlineError", { sp = M.colors.dark_red, gui = "undercurl" })
+    M.highlight("DiagnosticUnderlineWarning", { sp = M.colors.purple, gui = "undercurl" })
+    M.highlight("DiagnosticUnderlineInfo", { sp = M.colors.cyan, gui = "undercurl" })
+    M.highlight("DiagnosticUnderlineHint", { sp = M.colors.comment_grey, gui = "undercurl" })
     M.highlight("FloatBorder", { fg = M.colors.comment_grey })
     M.highlight("FloatBorderDark", { fg = M.colors.comment_grey, bg = M.colors.dark_black })
     M.highlight("FloatShadow", { bg = M.colors.black, blend = 80 })
@@ -329,6 +330,7 @@ M.setup = function()
     M.highlight("TSDefinition", { gui = "bold" })
 
     M.highlight("IndentBlanklineContextChar", { fg = M.colors.visual_grey, gui = "nocombine" })
+    M.highlight("IndentBlanklineContextStart", { sp = M.colors.visual_grey, gui = "underline" })
 
     M.highlight("RenamePrompt", { fg = M.colors.dark_yellow, gui = "bold" })
     M.highlight("DiagnosticSource", { fg = M.colors.cursor_grey, gui = "bold" })
@@ -336,6 +338,11 @@ M.setup = function()
     M.link("BqfPreviewRange", "DiffChange")
 
     M.link("Dash", "markdownBold")
+
+    M.highlight("CmpItemAbbr", { fg = M.colors.white })
+    M.highlight("CmpItemAbbrDeprecated", { fg = M.colors.red })
+    M.highlight("CmpItemAbbrMatchFuzzy", { fg = M.colors.yellow })
+    M.highlight("CmpItemMenu", { fg = M.colors.comment_grey })
 end
 
 return M
