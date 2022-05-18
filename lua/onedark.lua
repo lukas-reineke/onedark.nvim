@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 M.highlight = function(group, options)
     local guifg = options.fg or "NONE"
@@ -36,7 +36,8 @@ M.colors = {
     comment_grey = "#5C6370",
     gutter_fg_grey = "#4B5263",
     cursor_grey = "#2C323C",
-    dark_cursor_grey = "#21262d",
+    dimm_cursor_gret = "#21262d",
+    dark_cursor_grey = "#1d2228",
     visual_grey = "#3E4452",
     special_grey = "#3B4048",
     bracket_grey = "#7C828C",
@@ -174,15 +175,10 @@ M.setup = function()
 
     M.highlight("CodeBlock", { bg = M.colors.dimm_black })
     M.highlight("HeadlineGreen", { bg = M.colors.diff_green })
-    M.highlight("HeadlineBlue", { bg = M.colors.dark_cursor_grey })
+    M.highlight("HeadlineBlue", { bg = M.colors.dimm_cursor_gret })
     M.highlight("HeadlineRed", { bg = M.colors.diff_red })
     M.highlight("HeadlinePurple", { bg = M.colors.diff_purple })
     M.highlight("HeadlineYellow", { bg = M.colors.diff_yellow })
-    vim.fn.sign_define("HeadlineGreen", { linehl = "HeadlineGreen" })
-    vim.fn.sign_define("HeadlineBlue", { linehl = "HeadlineBlue" })
-    vim.fn.sign_define("HeadlineRed", { linehl = "HeadlineRed" })
-    vim.fn.sign_define("HeadlinePurple", { linehl = "HeadlinePurple" })
-    vim.fn.sign_define("HeadlineYellow", { linehl = "HeadlineYellow" })
     M.highlight("OrgTSHeadlineLevel1", { fg = M.colors.green, gui = "bold" })
     M.highlight("OrgTSHeadlineLevel2", { fg = M.colors.blue, gui = "bold" })
     M.highlight("OrgTSHeadlineLevel3", { fg = M.colors.red, gui = "bold" })
@@ -351,9 +347,21 @@ M.setup = function()
     M.link("Dash", "markdownBold")
 
     M.highlight("CmpItemAbbr", { fg = M.colors.white })
-    M.highlight("CmpItemAbbrDeprecated", { fg = M.colors.red })
+    M.highlight("CmpItemAbbrDeprecated", { fg = M.colors.comment_grey })
     M.highlight("CmpItemAbbrMatchFuzzy", { fg = M.colors.yellow })
     M.highlight("CmpItemMenu", { fg = M.colors.comment_grey })
+    M.highlight("CmpItemKindMethod", { fg = M.colors.blue })
+    M.highlight("CmpItemKindFunction", { fg = M.colors.blue })
+    M.highlight("CmpItemKindVariable", { fg = M.colors.red })
+    M.highlight("CmpItemKindConstant", { fg = M.colors.purple })
+    M.highlight("CmpItemKindProperty", { fg = M.colors.red })
+    M.highlight("CmpItemKindField", { fg = M.colors.red })
+    M.highlight("CmpItemKindEnumMember", { fg = M.colors.cyan })
+    M.highlight("CmpItemKindText", { fg = M.colors.yellow })
+    M.highlight("CmpItemKindClass", { fg = M.colors.dark_yellow })
+    M.highlight("CmpItemKindInterface", { fg = M.colors.dark_yellow })
+    M.highlight("CmpItemKindStruct", { fg = M.colors.dark_yellow })
+    M.highlight("CmpItemKindModule", { fg = M.colors.cyan })
 
     M.highlight("LightspeedUnlabeledMatch", { bg = M.colors.red, fg = M.colors.black, gui = "bold" })
     M.highlight("LightspeedLabel", { fg = M.colors.purple, gui = "bold" })
@@ -362,7 +370,7 @@ M.setup = function()
     M.highlight("org_hyperlink", { fg = M.colors.blue, gui = "underline" })
     M.highlight("org_verbatim", { fg = M.colors.bracket_grey, gui = "italic" })
     M.highlight("org_code", { fg = M.colors.yellow, bg = M.colors.dimm_black })
-    M.highlight("OrgTSTable", { bg = M.colors.dimm_black })
+    M.highlight("OrgTSTable", { bg = M.colors.dark_cursor_grey })
 
     M.highlight("CodeBlock", { bg = M.colors.dimm_black })
 end
