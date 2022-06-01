@@ -373,6 +373,22 @@ M.setup = function()
     M.highlight("OrgTSTable", { bg = M.colors.dark_cursor_grey })
 
     M.highlight("CodeBlock", { bg = M.colors.dimm_black })
+
+    M.highlight("NotifyERRORBorder", { fg = M.colors.red })
+    M.highlight("NotifyWARNBorder", { fg = M.colors.yellow })
+    M.highlight("NotifyINFOBorder", { fg = M.colors.green })
+    M.highlight("NotifyDEBUGBorder", { fg = M.colors.comment_grey })
+    M.highlight("NotifyTRACEBorder", { fg = M.colors.purple })
+    M.highlight("NotifyERRORIcon", { fg = M.colors.red })
+    M.highlight("NotifyWARNIcon", { fg = M.colors.yellow })
+    M.highlight("NotifyINFOIcon", { fg = M.colors.green })
+    M.highlight("NotifyDEBUGIcon", { fg = M.colors.comment_grey })
+    M.highlight("NotifyTRACEIcon", { fg = M.colors.purple })
+    M.highlight("NotifyERRORTitle", { fg = M.colors.red })
+    M.highlight("NotifyWARNTitle", { fg = M.colors.yellow })
+    M.highlight("NotifyINFOTitle", { fg = M.colors.green })
+    M.highlight("NotifyDEBUGTitle", { fg = M.colors.comment_grey })
+    M.highlight("NotifyTRACETitle", { fg = M.colors.purple })
 end
 
 return M
