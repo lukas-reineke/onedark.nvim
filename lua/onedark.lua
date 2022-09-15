@@ -6,9 +6,19 @@ M.highlight = function(group, options)
     local guisp = options.sp or "NONE"
     local gui = options.gui or "NONE"
     local blend = options.blend or 0
+    local ctermfg = options.ctermfg or "NONE"
 
     vim.cmd(
-        string.format("highlight %s guifg=%s guibg=%s guisp=%s gui=%s blend=%d", group, guifg, guibg, guisp, gui, blend)
+        string.format(
+            "highlight %s guifg=%s ctermfg=%s guibg=%s guisp=%s gui=%s blend=%d",
+            group,
+            guifg,
+            ctermfg,
+            guibg,
+            guisp,
+            gui,
+            blend
+        )
     )
 end
 
@@ -21,12 +31,16 @@ M.colors = {
     dark_red = "#BE5046",
     diff_red = "#2c1517",
     green = "#98C379",
+    dark_green = "#59843b",
+    dimm_green = "#41602b",
     diff_green = "#1e2718",
     yellow = "#E5C07B",
     diff_yellow = "#3e2e1e",
     dark_yellow = "#D19A66",
     blue = "#61AFEF",
+    dimm_blue = "#0d4c7f",
     purple = "#C678DD",
+    dimm_purple = "#633c6e",
     diff_purple = "#27182C",
     cyan = "#56B6C2",
     white = "#ABB2BF",
@@ -36,7 +50,7 @@ M.colors = {
     comment_grey = "#5C6370",
     gutter_fg_grey = "#4B5263",
     cursor_grey = "#2C323C",
-    dimm_cursor_gret = "#21262d",
+    dimm_cursor_grey = "#21262d",
     dark_cursor_grey = "#1d2228",
     visual_grey = "#3E4452",
     special_grey = "#3B4048",
@@ -45,8 +59,8 @@ M.colors = {
 
 M.setup = function()
     vim.g.colors_name = "onedark"
-    vim.cmd [[highlight clear]]
-    vim.cmd [[syntax reset]]
+    -- vim.cmd [[highlight clear]]
+    -- vim.cmd [[syntax reset]]
 
     M.highlight("Comment", { fg = M.colors.comment_grey, gui = "italic,bold" })
     M.highlight("Constant", { fg = M.colors.cyan })
@@ -91,6 +105,10 @@ M.setup = function()
     M.highlight("VirtColumn", { fg = M.colors.dark_black })
     M.highlight("Conceal", { fg = M.colors.red })
     M.highlight("Cursor", { fg = M.colors.black, bg = M.colors.green })
+    M.highlight("LspCodeLens", { fg = M.colors.bracket_grey })
+    M.highlight("LspCodeLensSeparator", { fg = M.colors.bracket_grey })
+    M.highlight("LspInlayHint", { fg = M.colors.visual_grey })
+    M.highlight("LSPDeprecated", { fg = M.colors.comment_grey, gui = "strikethrough" })
     M.highlight("CursorIM", {})
     M.highlight("CursorColumn", { bg = M.colors.dark_black })
     M.highlight("CursorLine", { bg = M.colors.dark_black })
@@ -103,7 +121,7 @@ M.setup = function()
     M.highlight("ErrorMsg", { fg = M.colors.red })
     M.highlight("VertSplit", { fg = M.colors.dark_black, bg = M.colors.dark_black })
     M.highlight("Folded", { fg = M.colors.comment_grey, bg = M.colors.dimm_black })
-    M.highlight("FoldColumn", {})
+    M.highlight("FoldColumn", { fg = M.colors.yellow })
     M.highlight("SignColumn", {})
     M.highlight("IncSearch", { fg = M.colors.comment_grey, bg = M.colors.green })
     M.highlight("LineNr", { fg = M.colors.gutter_fg_grey })
@@ -122,7 +140,7 @@ M.setup = function()
     M.highlight("ESearchMatch", { fg = M.colors.black, bg = M.colors.comment_grey })
     M.highlight("QuickFixLine", { gui = "bold" })
     M.highlight("SpecialKey", { fg = M.colors.special_grey })
-    M.highlight("SpellBad", { gui = "undercurl", sp = M.colors.special_grey })
+    M.highlight("SpellBad", { gui = "undercurl", sp = M.colors.red })
     M.highlight("SpellCap", { gui = "undercurl", sp = M.colors.special_grey })
     M.highlight("SpellLocal", { gui = "undercurl", sp = M.colors.special_grey })
     M.highlight("SpellRare", { gui = "undercurl", sp = M.colors.special_grey })
@@ -167,26 +185,25 @@ M.setup = function()
     M.highlight("markdownLinkText", { fg = M.colors.blue })
     M.highlight("markdownLinkDelimiter", { fg = M.colors.white })
     M.highlight("markdownUrl", { fg = M.colors.purple })
-    M.highlight("MDTSFencedCodeBlock", { fg = M.colors.special_grey })
+    M.highlight("MDTSFencedCodeBlock", { fg = M.colors.red })
     M.highlight("MDTSFencedCodeBlockInfo", { fg = M.colors.dark_yellow })
-    M.highlight("MDTSHeadlineMarker", { fg = M.colors.special_grey })
     M.highlight("MDTSLink", { fg = M.colors.blue })
     M.highlight("MDTSLinkText", { fg = M.colors.white })
 
     M.highlight("CodeBlock", { bg = M.colors.dimm_black })
     M.highlight("HeadlineGreen", { bg = M.colors.diff_green })
-    M.highlight("HeadlineBlue", { bg = M.colors.dimm_cursor_gret })
+    M.highlight("HeadlineBlue", { bg = M.colors.dimm_cursor_grey })
     M.highlight("HeadlineRed", { bg = M.colors.diff_red })
     M.highlight("HeadlinePurple", { bg = M.colors.diff_purple })
     M.highlight("HeadlineYellow", { bg = M.colors.diff_yellow })
-    M.highlight("OrgTSHeadlineLevel1", { fg = M.colors.green, gui = "bold" })
-    M.highlight("OrgTSHeadlineLevel2", { fg = M.colors.blue, gui = "bold" })
-    M.highlight("OrgTSHeadlineLevel3", { fg = M.colors.red, gui = "bold" })
-    M.highlight("OrgTSHeadlineLevel4", { fg = M.colors.purple, gui = "bold" })
-    M.highlight("OrgTSHeadlineLevel5", { fg = M.colors.yellow, gui = "bold" })
-    M.highlight("OrgTSHeadlineLevel6", { fg = M.colors.green, gui = "bold" })
-    M.highlight("OrgTSHeadlineLevel7", { fg = M.colors.blue, gui = "bold" })
-    M.highlight("OrgTSHeadlineLevel8", { fg = M.colors.red, gui = "bold" })
+    M.highlight("@OrgTSHeadlineLevel1", { fg = M.colors.green, gui = "bold" })
+    M.highlight("@OrgTSHeadlineLevel2", { fg = M.colors.blue, gui = "bold" })
+    M.highlight("@OrgTSHeadlineLevel3", { fg = M.colors.red, gui = "bold" })
+    M.highlight("@OrgTSHeadlineLevel4", { fg = M.colors.purple, gui = "bold" })
+    M.highlight("@OrgTSHeadlineLevel5", { fg = M.colors.yellow, gui = "bold" })
+    M.highlight("@OrgTSHeadlineLevel6", { fg = M.colors.green, gui = "bold" })
+    M.highlight("@OrgTSHeadlineLevel7", { fg = M.colors.blue, gui = "bold" })
+    M.highlight("@OrgTSHeadlineLevel8", { fg = M.colors.red, gui = "bold" })
 
     --- Treesitter
     -- Misc
@@ -233,6 +250,7 @@ M.setup = function()
     -- M.highlight("TSException", {})
     -- M.highlight("TSType", {})
     M.highlight("TSTypeBuiltin", { fg = M.colors.dark_yellow, gui = "bold" })
+    M.highlight("TSTextReference", { fg = M.colors.blue, gui = "underline" })
     -- M.highlight("TSStructure", {})
     -- M.highlight("TSInclude", {})
 
@@ -247,7 +265,7 @@ M.setup = function()
     -- M.highlight("TSUnderline", {})
     -- M.highlight("TSTitle", {})
     -- M.highlight("TSLiteral", {})
-    -- M.highlight("TSURI", {})
+    M.highlight("TSURI", { fg = M.colors.blue, gui = "underline" })
 
     -- -- Tags
     -- M.highlight("TSTag", {})
@@ -321,11 +339,11 @@ M.setup = function()
     M.highlight("EchoDocFloat", { bg = M.colors.dark_black })
 
     M.highlight("DiagnosticError", { fg = M.colors.dark_red, gui = "bold" })
-    M.highlight("DiagnosticWarn", { fg = M.colors.purple, gui = "bold" })
+    M.highlight("DiagnosticWarn", { fg = M.colors.dark_yellow, gui = "bold" })
     M.highlight("DiagnosticInfo", { fg = M.colors.cyan, gui = "bold" })
     M.highlight("DiagnosticHint", { fg = M.colors.comment_grey, gui = "bold" })
     M.highlight("DiagnosticUnderlineError", { sp = M.colors.dark_red, gui = "undercurl" })
-    M.highlight("DiagnosticUnderlineWarning", { sp = M.colors.purple, gui = "undercurl" })
+    M.highlight("DiagnosticUnderlineWarn", { sp = M.colors.dark_yellow, gui = "undercurl" })
     M.highlight("DiagnosticUnderlineInfo", { sp = M.colors.cyan, gui = "undercurl" })
     M.highlight("DiagnosticUnderlineHint", { sp = M.colors.comment_grey, gui = "undercurl" })
     M.highlight("FloatBorder", { fg = M.colors.comment_grey })
@@ -338,6 +356,7 @@ M.setup = function()
 
     M.highlight("IndentBlanklineContextChar", { fg = M.colors.visual_grey, gui = "nocombine" })
     M.highlight("IndentBlanklineContextStart", { sp = M.colors.visual_grey, gui = "underline" })
+    M.highlight("IndentBlanklineContextSpaceChar", { gui = "nocombine" })
 
     M.highlight("RenamePrompt", { fg = M.colors.dark_yellow, gui = "bold" })
     M.highlight("DiagnosticSource", { fg = M.colors.cursor_grey, gui = "bold" })
@@ -373,22 +392,67 @@ M.setup = function()
     M.highlight("OrgTSTable", { bg = M.colors.dark_cursor_grey })
 
     M.highlight("CodeBlock", { bg = M.colors.dimm_black })
+    M.highlight("Quote", { fg = M.colors.dark_yellow })
 
     M.highlight("NotifyERRORBorder", { fg = M.colors.red })
-    M.highlight("NotifyWARNBorder", { fg = M.colors.yellow })
+    M.highlight("NotifyWARNBorder", { fg = M.colors.dark_yellow })
     M.highlight("NotifyINFOBorder", { fg = M.colors.green })
     M.highlight("NotifyDEBUGBorder", { fg = M.colors.comment_grey })
     M.highlight("NotifyTRACEBorder", { fg = M.colors.purple })
     M.highlight("NotifyERRORIcon", { fg = M.colors.red })
-    M.highlight("NotifyWARNIcon", { fg = M.colors.yellow })
+    M.highlight("NotifyWARNIcon", { fg = M.colors.dark_yellow })
     M.highlight("NotifyINFOIcon", { fg = M.colors.green })
     M.highlight("NotifyDEBUGIcon", { fg = M.colors.comment_grey })
     M.highlight("NotifyTRACEIcon", { fg = M.colors.purple })
     M.highlight("NotifyERRORTitle", { fg = M.colors.red })
-    M.highlight("NotifyWARNTitle", { fg = M.colors.yellow })
+    M.highlight("NotifyWARNTitle", { fg = M.colors.dark_yellow })
     M.highlight("NotifyINFOTitle", { fg = M.colors.green })
     M.highlight("NotifyDEBUGTitle", { fg = M.colors.comment_grey })
     M.highlight("NotifyTRACETitle", { fg = M.colors.purple })
+
+    M.highlight("NavicSeparator", { fg = M.colors.comment_grey, bg = M.colors.dark_black })
+
+    M.highlight("NavicIconsFunction", { fg = M.colors.green, bg = M.colors.dark_black })
+    M.highlight("NavicIconsMethod", { fg = M.colors.green, bg = M.colors.dark_black })
+    M.highlight("NavicIconsVariable", { fg = M.colors.blue, bg = M.colors.dark_black })
+    M.highlight("NavicIconsConstant", { fg = M.colors.purple, bg = M.colors.dark_black })
+    M.highlight("NavicIconsProperty", { fg = M.colors.blue, bg = M.colors.dark_black })
+    M.highlight("NavicIconsStruct", { fg = M.colors.purple, bg = M.colors.dark_black })
+    M.highlight("NavicIconsInterface", { fg = M.colors.cyan, bg = M.colors.dark_black })
+    M.highlight("NavicIconsEnum", { fg = M.colors.yellow, bg = M.colors.dark_black })
+    M.highlight("NavicIconsField", { fg = M.colors.yellow, bg = M.colors.dark_black })
+    M.highlight("NavicIconsClass", { fg = M.colors.purple, bg = M.colors.dark_black })
+
+    M.highlight("NavicText", { fg = M.colors.comment_grey, bg = M.colors.dark_black })
+
+    M.highlight("CCovered", { fg = M.colors.dark_green })
+    -- M.highlight("CUncovered", { fg = M.colors.red })
+
+    M.highlight("DapUIScope", { fg = M.colors.blue })
+    M.highlight("DapUIType", { fg = M.colors.yellow })
+    M.highlight("DapUIVariable", { fg = M.colors.red })
+    M.highlight("DapUIDecoration", { fg = M.colors.purple })
+    M.highlight("DapUIModifiedValue", { fg = M.colors.dark_yellow, gui = "bold" })
+    M.highlight("DapUIThread", { fg = M.colors.green })
+    M.highlight("DapUIStoppedThread", { fg = M.colors.cyan })
+    M.highlight("DapUISource", { fg = M.colors.green })
+    M.highlight("DapUILineNumber", { fg = M.colors.dark_yellow })
+    M.highlight("DapUIFloatBorder", { fg = M.colors.comment_grey })
+    M.highlight("DapUIWatchesHeader", { fg = M.colors.cyan })
+    M.highlight("DapUIWatchesEmpty", { fg = M.colors.red })
+    M.highlight("DapUIWatchesValue", { fg = M.colors.green })
+    M.highlight("DapUIWatchesError", { fg = M.colors.dark_red })
+    M.highlight("DapUIWatchesFrame", { fg = M.colors.purple })
+    M.highlight("DapUIBreakpointsPath", { fg = M.colors.green })
+    M.highlight("DapUIBreakpointsInfo", { fg = M.colors.green })
+    M.highlight("DapUIBreakpointsCurrentLine", { fg = M.colors.yellow })
+    M.highlight("DapUIBreakpointsLine", { fg = M.colors.cyan })
+    M.highlight("DapUIFrameName", { fg = M.colors.red })
+
+    M.highlight("OctoEditable", { bg = M.colors.dimm_black })
+
+    M.highlight("SjLabel", { fg = M.colors.black, bg = M.colors.purple, gui = "bold" })
+    M.highlight("SjSearch", { fg = M.colors.green })
 end
 
 return M
