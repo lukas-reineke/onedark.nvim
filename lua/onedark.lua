@@ -187,7 +187,7 @@ M.setup = function()
     M.highlight("markdownUrl", { fg = M.colors.purple })
     M.highlight("MDTSFencedCodeBlock", { fg = M.colors.red })
     M.highlight("MDTSFencedCodeBlockInfo", { fg = M.colors.dark_yellow })
-    M.highlight("MDTSLink", { fg = M.colors.blue })
+    M.highlight("@text.reference", { fg = M.colors.blue })
     M.highlight("MDTSLinkText", { fg = M.colors.white })
 
     M.highlight("CodeBlock", { bg = M.colors.dimm_black })
@@ -453,6 +453,15 @@ M.setup = function()
 
     M.highlight("SjLabel", { fg = M.colors.black, bg = M.colors.purple, gui = "bold" })
     M.highlight("SjSearch", { fg = M.colors.green })
+
+    M.highlight("PackageInfoUpToDateVersion", { fg = M.colors.cyan })
+    M.highlight("PackageInfoOutdatedVersion", { fg = M.colors.dark_yellow })
+
+    M.highlight("NeotestUnknown", { fg = M.colors.comment_grey })
+    M.highlight("NeotestSkipped", { fg = M.colors.yellow })
+    M.highlight("NeotestRunning", { fg = M.colors.purple })
+    M.highlight("NeotestPassed", { fg = M.colors.green })
+    M.highlight("NeotestFailed", { fg = M.colors.dark_red })
 end
 
 return M
