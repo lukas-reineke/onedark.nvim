@@ -100,7 +100,7 @@ M.setup = function()
     M.highlight("Ignore", {})
     M.highlight("Error", { fg = M.colors.dark_red })
     M.highlight("Todo", { fg = M.colors.purple, gui = "bold" })
-    M.highlight("@text.fixme.comment", { fg = M.colors.dark_yellow, gui = "bold" })
+    -- M.highlight("@text.fixme.comment", { fg = M.colors.dark_yellow, gui = "bold" })
 
     M.highlight("ColorColumn", {})
     M.highlight("VirtColumn", { fg = M.colors.dark_black })
@@ -114,11 +114,20 @@ M.setup = function()
     M.highlight("CursorColumn", { bg = M.colors.dark_black })
     M.highlight("CursorLine", { bg = M.colors.dark_black })
     M.highlight("Directory", { fg = M.colors.blue })
+
     M.highlight("DiffAdd", { bg = M.colors.diff_green })
-    M.highlight("DiffChange", { bg = M.colors.diff_yellow })
-    M.highlight("DiffDelete", { fg = M.colors.cursor_grey })
-    M.highlight("DiffDeleteOld", { bg = M.colors.diff_red })
+    M.highlight("DiffChange", {})
+
+    -- M.highlight("DiffviewDiffDelete", { bg = M.colors.diff_red })
+    -- M.highlight("DiffDelete", { fg = M.colors.cursor_grey })
+
+    M.highlight("DiffDelete", { bg = M.colors.diff_red })
+    M.highlight("FuDiffDelete", { fg = M.colors.cursor_grey })
+
+    M.highlight("DiffviewDiffDeleteDim", { fg = M.colors.cursor_grey })
+    M.highlight("FuDiffDeleteOld", { bg = M.colors.diff_red })
     M.highlight("DiffText", { bg = M.colors.diff_yellow })
+
     M.highlight("ErrorMsg", { fg = M.colors.red })
     M.highlight("VertSplit", { fg = M.colors.dark_black, bg = M.colors.dark_black })
     M.highlight("Folded", { fg = M.colors.comment_grey, bg = M.colors.dimm_cursor_grey })
@@ -394,7 +403,7 @@ M.setup = function()
     M.highlight("RenamePrompt", { fg = M.colors.dark_yellow, gui = "bold" })
     M.highlight("DiagnosticSource", { fg = M.colors.cursor_grey, gui = "bold" })
 
-    M.link("BqfPreviewRange", "DiffChange")
+    M.link("BqfPreviewRange", "DiffText")
 
     M.link("Dash", "markdownBold")
 
